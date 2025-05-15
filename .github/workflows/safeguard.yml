@@ -1,7 +1,8 @@
 name: Automated Snapshot Sync
 on:
+  workflow_dispatch:  # Allows manual execution
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 * * * *'  # Runs every hour
 jobs:
   backup:
     runs-on: ubuntu-latest
