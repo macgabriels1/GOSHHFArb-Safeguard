@@ -1,0 +1,17 @@
+name: Automated Snapshot Sync
+on:
+  workflow_dispatch:  # Enables manual execution in GitHub Actions
+  push:  # Runs when commits are pushed
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Commit Backup Updates
+        run: |
+          git add .
+          git commit -m "Automated recall safeguard snapshot"
+          git push origin main
