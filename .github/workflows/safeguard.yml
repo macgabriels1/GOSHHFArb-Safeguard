@@ -1,25 +1,33 @@
 name: Automated Snapshot Sync
+
 on:
-  workflow_dispatch:  # Enables manual execution in GitHub Actions
-  push:  # Runs when commits are pushed
-  schedule:
-    - cron: '0 * * * *'  # Runs every hour
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
-  backup:
+  sync:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Set Up Git Identity
+        uses: actions/checkout@v3
+
+      - name: Configure Git
         run: |
-          git config --global user.email "blacksaintsusa@mail.com"
-          git config --global user.name "macgabriels1"
-      - name: Commit Backup Updates
+          git config --global user.name "YourGitHubUsername"
+          git config --global user.email "YourGitHubEmail"
+
+      - name: Verify Changes
+        run: |
+          git status
+
+      - name: Commit Changes if Needed
         run: |
           git add .
-          git commit -m "Automated recall safeguard snapshot"
-          - name: Push Changes to GitHub
-  run: |
-    git push origin main
-- name: Trigger Update
-  run: echo "Triggering update"
+          git commit -m "Automated snapshot sync" || echo "No changes to commit"
+
+      - name: Push Changes to GitHub
+        run: |
+          git push origin main || echo "No changes to push"
