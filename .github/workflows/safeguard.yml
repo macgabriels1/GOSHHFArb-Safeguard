@@ -18,6 +18,9 @@ jobs:
         run: |
           git add .
           git commit -m "Automated recall safeguard snapshot"
-          git push origin main
+          - name: Push Changes to GitHub
+  run: |
+    git push origin main
+
 - name: Trigger Update
   run: echo "Triggering update"
