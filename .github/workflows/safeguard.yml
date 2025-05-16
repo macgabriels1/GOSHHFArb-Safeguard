@@ -21,6 +21,5 @@ jobs:
           - name: Push Changes to GitHub
   run: |
     git push origin main
-
 - name: Trigger Update
   run: echo "Triggering update"
