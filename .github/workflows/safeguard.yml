@@ -1,6 +1,7 @@
 name: Automated Snapshot Sync
 on:
-  workflow_dispatch:  # Allows manual execution
+  workflow_dispatch:  # Enables manual execution in GitHub Actions
+  push:  # Runs when commits are pushed
   schedule:
     - cron: '0 * * * *'  # Runs every hour
 jobs:
